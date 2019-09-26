@@ -23,5 +23,6 @@ android {
 dependencies {
     implementation APPCOMPAT_LIB
     implementation SUPPORT_CONSTRAINT
+    implementation RECYCLERVIEW_LIB
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
