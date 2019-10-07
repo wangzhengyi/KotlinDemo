@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
+import android.view.View
+import android.widget.TextView
 import com.ss.android.auto.adapter.ForecastListAdapter
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    lateinit var tvText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +23,14 @@ class MainActivity : AppCompatActivity() {
         val rvList = findViewById<RecyclerView>(R.id.rv_list)
         rvList.layoutManager = LinearLayoutManager(this)
         rvList.adapter = ForecastListAdapter(this, items)
+
+        tvText = findViewById(R.id.tv_title)
+        tvText.text = "hello kotlin"
+        printId(tvText)
+    }
+
+    private fun printId(view: View?) {
+        Log.d("wangzhengyi", "id:" + view?.id)
     }
 
     private val items = listOf(
