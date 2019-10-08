@@ -9,6 +9,10 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.ss.android.auto.adapter.ForecastListAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     lateinit var tvText: TextView
@@ -17,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
+        printThreadName()
     }
 
     private fun initView() {
@@ -42,4 +47,19 @@ class MainActivity : AppCompatActivity() {
             "Sat 6/28 - TRAPPED IN WEATHERSTATION - 23/18",
             "Sun 6/29 - Sunny - 20/7"
     )
+
+    private fun printThreadName() {
+        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        coroutineScope.launch {
+            withContext(Dispatchers.IO) {
+                Log.e("wangzhengyi", "current thread name1=" + Thread.currentThread())
+            }
+            withContext(Dispatchers.Main) {
+                Log.e("wangzhengyi", "current thread name2=" + Thread.currentThread())
+            }
+            Log.e("wangzhengyi", "current thread name3=" + Thread.currentThread())
+        }
+    }
+
+
 }
